@@ -1,0 +1,29 @@
+name: What's that JAVA version
+run-name: What's that JAVA version
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code source
+        uses: actions/checkout@v4
+      - name: Lister les fichiers présents
+        run: ls -la
+      - name: Configurer JDK 21
+        uses: actions/setup-java@v5
+        with:
+          java-version: "21"
+          distribution: "temurin"
+          cache: "maven"
+      - name: Analyser avec CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: java
+      - name: Construire avec Maven
+        run: mvn -B clean package -DskipTests
+      - name: Analyser avec CodeQL
+        uses: github/codeql-action/analyze@v4
