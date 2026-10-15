@@ -55,3 +55,9 @@ jobs:
         with:
           name: jacoco-report
           path: target/site/jacoco
+
+      - name: Publier le rapport SpotBugs
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapport-spotbugs
+          path: target/spotbugs/
