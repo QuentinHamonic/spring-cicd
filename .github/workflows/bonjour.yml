@@ -1,5 +1,5 @@
-name: Exemple Bonjour 
-run-name: Exemple Bonjour 
+name: Affichage fichiers
+run-name: Affichage fichiers
  
 on: 
   workflow_dispatch:
@@ -10,6 +10,6 @@ jobs:
  
     steps: 
     - name: Récupérer le code source 
-      run: actions/checkout@v4
+      uses: actions/checkout@v4
     - name: Compter les fichiers via ls
       run : ls -la
