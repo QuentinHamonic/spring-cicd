@@ -14,32 +14,41 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Récupérer le code source
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
+
       - name: Lister les fichiers présents
         run: ls -la
+
       - name: Configurer JDK 21
         uses: actions/setup-java@v5
         with:
           java-version: "21"
           distribution: "temurin"
           cache: "maven"
+
       - name: Analyser avec CodeQL
         uses: github/codeql-action/init@v4
         with:
           languages: java
+
       - name: Construire avec Maven
         run: mvn -B clean package -DskipTests
+
       - name: Analyser avec CodeQL
         uses: github/codeql-action/analyze@v4
+
       - name: Construire avec Maven
         run: mvn -B clean verify -Dspring.profiles.active=test
+
       - name: Générer le site Maven
         run: mvn site
+
       - name: Publier le rapport Checkstyle
         uses: actions/upload-artifact@v4
         with:
           name: rapport-checkstyle
           path: target/site/
+
       - name: Sauvegarder le rapport JaCoCo
         if: ${{ success() || failure() }}
         uses: actions/upload-artifact@v4
