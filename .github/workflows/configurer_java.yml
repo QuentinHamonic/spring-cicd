@@ -1,0 +1,22 @@
+name: What's that JAVA version
+run-name: What's that JAVA version
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code source
+        uses: actions/checkout@v4
+      - name: Configurer JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: "21"
+          distribution: "temurin"
+          cache: "maven"
+      - name: Afficher la version de JAVA
+        run: java --version
+      - name: Afficher la version de Maven
+        run: mvn --version
