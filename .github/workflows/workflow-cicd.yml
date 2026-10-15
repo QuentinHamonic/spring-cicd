@@ -1,5 +1,5 @@
-name: What's that JAVA version
-run-name: What's that JAVA version
+name: CodeQL
+run-name: CodeQL
 
 on:
   push:
